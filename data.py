@@ -342,3 +342,25 @@ class VGGFaceDAGANDataset(DAGANDataset):
 
         return x_train, x_test, x_val
 
+class BipDAGANImbalancedDataset(DAGANImbalancedDataset):
+    def __init__(self, batch_size, last_training_class_index, reverse_channels, num_of_gpus, gen_batches):
+        super(BipDAGANImbalancedDataset, self).__init__(batch_size, last_training_class_index, reverse_channels,
+                                                             num_of_gpus, gen_batches)
+
+    def load_dataset(self, last_training_class_index):
+        num_classes = 2
+        x_kont = np.load("/datasets/kont_data.npy")
+        x_kont = x_kont.reshape(1, x_kont.shape[0], x_kont.shape[1], x_kont.shape[2], 1).astype('float32')
+        x_mani = np.load("/datasets/mani_data.npy")
+        x_mani = x_mani.reshape(1, x_mani.shape[0], x_mani.shape[1], x_mani.shape[2], 1).astype('float32')
+        x_temp = []
+
+        x_temp.append(x_kont[0,:24])
+        x_temp.append(x_mani[0,:24])
+
+        self.x = np.array(x_temp)
+        self.x = self.x / np.max(self.x)
+
+        x_train, x_test, x_val = self.x[0, :12], self.x[0, 12:], self.x[1, :12]
+
+        return x_train, x_test, x_val
