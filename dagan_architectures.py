@@ -264,10 +264,11 @@ class UResNetGenerator:
                 num_filters = 8
                 z_layers = []
                 concat_shape = [layer_shape.get_shape().as_list() for layer_shape in encoder_layers]
+                widths = [11, 22, 44, 87, 173]
 
                 for i in range(len(self.inner_layers)):
                     h = concat_shape[len(encoder_layers) - 1 - i][1]
-                    w = concat_shape[len(encoder_layers) - 1 - i][1]
+                    w = widths[i] # concat_shape[len(encoder_layers) - 1 - i][1]
                     z_dense = tf.layers.dense(z_inputs, h * w * num_filters)
                     z_reshape_noise = tf.reshape(z_dense, [self.batch_size, h, w, num_filters])
                     num_filters /= 2
@@ -315,8 +316,8 @@ class UResNetGenerator:
                                                                  num_features=num_features,
                                                                  dim_upscale=False,
                                                                  local_inner_layers=decoder_inner_layers,
-                                                                 w_size=upscale_shape[1],
-                                                                 h_size=upscale_shape[2],
+                                                                 w_size=upscale_shape[2],
+                                                                 h_size=upscale_shape[1],
                                                                  dropout_rate=dropout_rate)
                                 decoder_inner_layers.append(outputs)
                         current_layers.append(outputs)
@@ -332,8 +333,8 @@ class UResNetGenerator:
                                 training=training,
                                 layer_to_skip_connect=current_layers,
                                 num_features=num_features,
-                                dim_upscale=True, local_inner_layers=decoder_inner_layers, w_size=upscale_shape[1],
-                                h_size=upscale_shape[2], dropout_rate=dropout_rate)
+                                dim_upscale=True, local_inner_layers=decoder_inner_layers, w_size=upscale_shape[2],
+                                h_size=upscale_shape[1], dropout_rate=dropout_rate)
                             current_layers.append(outputs)
                         if (idx-1)>=0:
                             outputs = tf.concat([outputs, encoder_layers[idx-1]], axis=3)

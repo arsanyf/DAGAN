@@ -348,7 +348,6 @@ class BipDAGANImbalancedDataset(DAGANImbalancedDataset):
                                                              num_of_gpus, gen_batches)
 
     def load_dataset(self, last_training_class_index):
-        num_classes = 2
         x_kont = np.load("/datasets/kont_data.npy")
         x_kont = x_kont.reshape(1, x_kont.shape[0], x_kont.shape[1], x_kont.shape[2], 1).astype('float32')
         x_mani = np.load("/datasets/mani_data.npy")
@@ -362,5 +361,9 @@ class BipDAGANImbalancedDataset(DAGANImbalancedDataset):
         self.x = self.x / np.max(self.x)
 
         x_train, x_test, x_val = self.x[0, :12], self.x[0, 12:], self.x[1, :12]
+
+        x_train = x_train.reshape(-1, x_train.shape[0], x_train.shape[1], x_train.shape[2], x_train.shape[3], 1)
+        x_test = x_test.reshape(-1, x_test.shape[0], x_test.shape[1], x_test.shape[2], x_test.shape[3], 1)
+        x_val = x_val.reshape(-1, x_val.shape[0], x_val.shape[1], x_val.shape[2], x_val.shape[3], 1)
 
         return x_train, x_test, x_val
