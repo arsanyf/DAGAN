@@ -61,11 +61,12 @@ class ExperimentBuilder(object):
 
         self.total_train_batches = int(data.training_data_size / (self.batch_size * self.num_gpus))
 
+
         self.total_gen_batches = int(data.generation_data_size / (self.batch_size * self.num_gpus))
 
         self.init = tf.global_variables_initializer()
         self.spherical_interpolation = True
-        self.tensorboard_update_interval = int(self.total_train_batches/100/self.num_gpus)
+        self.tensorboard_update_interval = int(self.total_train_batches/10/self.num_gpus)
         self.total_epochs = 200
 
         if self.continue_from_epoch == -1:

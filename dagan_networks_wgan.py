@@ -101,10 +101,10 @@ class DAGAN:
         return generated_samples
 
     def augment_rotate(self, image_a, image_b):
-        r = tf.unstack(tf.random_uniform([1], minval=0, maxval=2, dtype=tf.int32, seed=None, name=None))
-        rotate_boolean = tf.equal(0, r, name="check-rotate-boolean")
-        [image_a, image_b] = tf.cond(rotate_boolean[0], lambda: self.rotate_data(image_a, image_b),
-                        lambda: [image_a, image_b])
+        #r = tf.unstack(tf.random_uniform([1], minval=0, maxval=2, dtype=tf.int32, seed=None, name=None))
+        #rotate_boolean = tf.equal(0, r, name="check-rotate-boolean")
+        #[image_a, image_b] = tf.cond(rotate_boolean[0], lambda: self.rotate_data(image_a, image_b),
+        #                lambda: [image_a, image_b])
         return image_a, image_b
 
     def data_augment_batch(self, batch_images_a, batch_images_b):
