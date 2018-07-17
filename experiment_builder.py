@@ -67,13 +67,13 @@ class ExperimentBuilder(object):
         self.init = tf.global_variables_initializer()
         self.spherical_interpolation = True
         self.tensorboard_update_interval = int(self.total_train_batches/10/self.num_gpus)
-        self.total_epochs = 200
+        self.total_epochs = 50
 
-        if self.continue_from_epoch == -1:
-            save_statistics(self.log_path, ['epoch', 'total_d_train_loss_mean', 'total_d_val_loss_mean',
-                                            'total_d_train_loss_std', 'total_d_val_loss_std',
-                                            'total_g_train_loss_mean', 'total_g_val_loss_mean',
-                                            'total_g_train_loss_std', 'total_g_val_loss_std'], create=True)
+        #if self.continue_from_epoch == -1:
+        #    save_statistics(self.log_path, ['epoch', 'total_d_train_loss_mean', 'total_d_val_loss_mean',
+        #                                    'total_d_train_loss_std', 'total_d_val_loss_std',
+        #                                    'total_g_train_loss_mean', 'total_g_val_loss_mean',
+        #                                    'total_g_train_loss_std', 'total_g_val_loss_std'], create=True)
 
     def run_experiment(self):
         with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
@@ -282,10 +282,10 @@ class ExperimentBuilder(object):
                             self.experiment_name, e))
                         print("Saved current best val model at", val_save_path)
 
-                    save_statistics(self.log_path, [e, total_d_train_loss_mean, total_d_val_loss_mean,
-                                                total_d_train_loss_std, total_d_val_loss_std,
-                                                total_g_train_loss_mean, total_g_val_loss_mean,
-                                                total_g_train_loss_std, total_g_val_loss_std])
+                    #save_statistics(self.log_path, [e, total_d_train_loss_mean, total_d_val_loss_mean,
+                    #                            total_d_train_loss_std, total_d_val_loss_std,
+                    #                            total_g_train_loss_mean, total_g_val_loss_mean,
+                    #                            total_g_train_loss_std, total_g_val_loss_std])
 
                     pbar_e.update(1)
 

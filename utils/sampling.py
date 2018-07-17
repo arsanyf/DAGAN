@@ -43,8 +43,8 @@ def sample_generator(num_generations, sess, same_images, inputs, dropout_rate, d
 
     image = np.concatenate((input_images, generated), axis=1)
     image = np.squeeze(image)
-    image = (image - np.min(image)) / (np.max(image) - np.min(image))
-    image = image * 255
+    #image = (image - np.min(image)) / (np.max(image) - np.min(image))
+    #image = image * 255
     image = image[:, (num_generations-1)*height:]
     #scipy.misc.imsave(file_name, image)
     np.save(file_name, image)
@@ -96,7 +96,7 @@ def sample_two_dimensions_generator(sess, same_images, inputs,
     im_dimension = im_size[3]
     image = np.squeeze(image)
     image = (image - np.min(image)) / (np.max(image) - np.min(image))
-    image = image * 255
+    #image = image * 255
     full_image = image[:, (num_generations-1)*height:]
 
 
