@@ -1,4 +1,4 @@
-import utils.interpolations
+import utils.interpolations as interpolations
 import tqdm
 from utils.storage import *
 from tensorflow.contrib import slim
@@ -96,7 +96,7 @@ class ExperimentBuilder(object):
                 z_vectors = np.random.normal(size=(self.num_generations * self.num_generations, self.z_dim))
 
             with tqdm.tqdm(total=self.total_gen_batches) as pbar_samp:
-                for i in range(self.total_gen_batches):
+                for i in range(int(self.total_gen_batches)):
                     x_gen_a = self.data.get_gen_batch()
                     sample_two_dimensions_generator(sess=sess,
                                                     same_images=self.same_images,
