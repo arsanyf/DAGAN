@@ -74,7 +74,7 @@ class ExperimentBuilder(object):
             self.writer = tf.summary.FileWriter(self.log_path, graph=tf.get_default_graph())
             self.saver = tf.train.Saver()
             if self.continue_from_epoch != -1:
-                checkpoint = "{}/{}_{}.ckpt".format(self.saved_models_filepath, self.experiment_name,
+                checkpoint = "{}train_saved_model_{}_{}.ckpt".format(self.saved_models_filepath, self.experiment_name,
                                                     self.continue_from_epoch)
                 variables_to_restore = []
                 for var in tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES):
