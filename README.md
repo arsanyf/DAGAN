@@ -45,16 +45,3 @@ The model training automatically uses unseen data to produce generations at the 
 python3 gen_bip_dagan.py --batch_size 32 --generator_inner_layers 3 --discriminator_inner_layers 5 --num_generations 64 --experiment_title bip_dagan_experiment --num_of_gpus 2 --z_dim 100 --dropout_rate_value 0.5
 ```
 All the arguments must match the trained network's arguments and the `continue_from_epoch` argument must correspond to the epoch the trained model was at.
-
-## Additional generated data not shown in the paper
-
-For further generated data please visit 
-<a href="https://drive.google.com/drive/folders/1IqdhiQzxHysSSnfSrGA9_jKTWzp9gl0k?usp=sharing" target="_blank">my Google Drive folder</a>.
-
-## Acknowledgements
-
-Special thanks to the CDT in Data Science at the University of Edinburgh for providing the funding and resources for this project.
-Furthermore, special thanks to my colleagues James Owers, Todor Davchev, Elliot Crowley, and Gavin Gray for reviewing this code and providing improvements and suggestions.
-
-Furthermore, the interpolations used in this project are a result of the <a href="https://arxiv.org/abs/1609.04468" target="_blank">Sampling Generative Networks paper</a> by Tom White. 
-The code itself was found at https://github.com/dribnet/plat.
