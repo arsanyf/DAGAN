@@ -32,7 +32,7 @@ sudo ln -s /path/to/datasets/ /datasets
 After the datasets are downloaded and the dependencies are installed, a DAGAN can be trained by running:
 
 ```
-python3 train_bip_dagan.py --batch_size 10 --generator_inner_layers 2 --discriminator_inner_layers 3 --num_generations 64 --experiment_title bip_dagan_experiment --num_of_gpus 8 --z_dim 100 --dropout_rate_value 0.5 --continue_from_epoch 70
+python3 train_bip_dagan.py --batch_size 10 --generator_inner_layers 2 --discriminator_inner_layers 3 --num_generations 64 --experiment_title bip_dagan_experiment --num_of_gpus 2 --z_dim 100 --dropout_rate_value 0.5 --continue_from_epoch 70
 ```
 
 The last option may be removed in the first run.
